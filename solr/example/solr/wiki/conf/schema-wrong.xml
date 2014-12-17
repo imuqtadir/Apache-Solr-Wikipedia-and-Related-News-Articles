@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<schema name="wiki" version="1.5">
+
+   <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
+      or Solr won't start. _version_ and update log are required for SolrCloud
+   --> 
+   <field name="_version_" type="long" indexed="true" stored="true"/>
+   
+   <!-- points to the root document of a block of nested documents. Required for nested
+      document support, may be removed otherwise
+   -->
+   <field name="_root_" type="string" indexed="true" stored="false"/>
+  <types>
+    <fieldType name="string" class="solr.StrField" sortMissingLast="true" omitNorms="true"/>
+    <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true" omitNorms="true"/>
+    <fieldType name="sint" class="solr.SortableIntField" sortMissingLast="true" omitNorms="true"/>
+    <fieldType name="text" class="solr.TextField" positionIncrementGap="100" autoGeneratePhraseQueries="true"/>
+	<fieldType name="text_general" class="solr.TextField" positionIncrementGap="100"/>
+	<fieldType name="int" class="solr.TrieIntField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="float" class="solr.TrieFloatField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="double" class="solr.TrieDoubleField" precisionStep="0" positionIncrementGap="0"/>
+
+ </types>
+
+
+ <fields>
+   
+   <field name="title" type="text_general" indexed="true" stored="true" />
+   <field name="url" type="text_general" indexed="true" stored="true"  multiValued="true" />
+   <field name="abstract" type="text_general" indexed="true" stored="true"  />
+   <field name="link" type="text_general" indexed="true" stored="true" multiValued="true"/>
+   <field name="anchor" type="text_general" indexed="true" stored="true"  multiValued="true" />
+   
+   
+ </fields>
+ 
+ 
+
+ <!--<copyField source="music" dest="ka_music" multiValued="true"/>-->
+ <!-- field for the QueryParser to use when an explicit fieldname is absent -->
+ 
+
+ <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
+ <solrQueryParser defaultOperator="OR"/>
+<defaultSearchField>text_general</defaultSearchField>
+
+</schema>
